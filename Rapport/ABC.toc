@@ -1,0 +1,10 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Principe et historique}{3}
+\contentsline {subsection}{\numberline {1.1}M\IeC {\'e}thodes ABC.}{3}
+\contentsline {subsection}{\numberline {1.2}Un exemple simple}{4}
+\contentsline {section}{\numberline {2}Trois algorithmes importants en m\IeC {\'e}thode ABC}{5}
+\contentsline {subsection}{\numberline {2.1}Correction par r\IeC {\'e}gression locale}{5}
+\contentsline {subsection}{\numberline {2.2}Algorithme MCMC dans le cadre ABC}{6}
+\contentsline {subsection}{\numberline {2.3}M\IeC {\'e}thodes de Monte-Carlo S\IeC {\'e}quentielles}{7}
+\contentsline {section}{\numberline {3}Application en \IeC {\'e}pid\IeC {\'e}miologie}{8}
+\contentsline {subsection}{\numberline {3.1}Mod\IeC {\`e}le SIR avec contact tracing}{8}

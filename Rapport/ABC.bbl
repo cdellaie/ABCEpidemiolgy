@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{Beaumont}
+Beaumont.
+\newblock Approximate bayesian computation in evolution and ecology.
+\newblock {\em Annual Review of Ecology, Evolution and Systematics},
+  41:379--406, 2010.
+
+\bibitem{BlumTran}
+Viet Chi~Tran Michael G.B.~Blum.
+\newblock Approximate bayesian computation for epidemiological models :
+  Applications to the cuban hiv-aids epidemic with contact tracing and
+  unobserved infectious population.
+\newblock 2009.
+
+\bibitem{Clemencon}
+V.C.~Tran S.~Clemencon and H.~De Arazoza.
+\newblock A stochastic sir model with contact tracing : large population limit
+  with statistical applications.
+\newblock {\em Journal of Biological Dynamics}, 2008.
+
+\end{thebibliography}
