@@ -8,6 +8,15 @@
 \usepackage{graphicx}
 \usepackage{tikz-cd}
 
+\usepackage{hyperref}
+\hypersetup{                    
+    colorlinks=true,                % colorise les liens
+    breaklinks=true,                % permet les retours à la ligne pour les liens trop longs
+    urlcolor= blue,                 % couleur des hyperliens
+    linkcolor= blue,                % couleur des liens internes aux documents (index, figures, tableaux, equations,...)
+    citecolor= cyan               % couleur des liens vers les references bibliographiques
+    }
+
 \title{Méthodes ABC en épidémiologie}
 \author{ Cl\'ement Dell'Aiera}
 \date{}
@@ -35,9 +44,14 @@
 \maketitle
 
 \begin{abstract}
-
+Nous présentons dans ce court rapport une introduction aux méthodes ABC, avec application au modèle SIR incorporant le contact tracing. Nous suivons l'articlede Blum et Tran~\cite{BlumTran} pour l'application en épidémiologie, ainsi que l'article de Beaumont~\cite{Beaumont}pour la présentation des méthodes ABC.
 \end{abstract}
 
+\begin{figure}[!h]\centering
+\includegraphics[scale=0.6]{SIR1.jpeg}
+\caption{Simulation du modèle SIR sur une population de $100$ individus.}
+\label{SIRCT}
+\end{figure}
 
 \newpage
 \tableofcontents
@@ -59,7 +73,7 @@ Ces méthodes que nous avons appelées "classiques" comportent néanmoins un inc
 \[N_\epsilon = \inf_{n}\{\forall m\geq n,|P(X_m=\theta)-p(x)|<\epsilon\}\]
 est bien défini, mais n'est pas calculable de façon universelle. \\
 
-Toutefois si la loi est discrète et de basse dimension, Rubin a proposé un algorithme qui permet de simuler des paramètres à partir de données sans vraisemblance.\\
+Toutefois si la loi est discrète et de basse dimension, Rubin~\cite{Beaumont} a proposé un algorithme qui permet de simuler des paramètres à partir de données sans vraisemblance.\\
 
 \fbox{\begin{minipage}{0.9\textwidth}
   Soit $y$ une observation, tant que le nombre de simulations acceptées est inférieur à $N$, répéter :
@@ -124,7 +138,7 @@ où l'on s'est fixé le noyau $K$ à l'avance. Une fois la régression effecuée
 \[\theta^*_i=\hat f(S(y))+\frac{\hat\sigma(S(y))}{\hat\sigma(S(x_i))}\hat\epsilon_i\]
 où $\hat f$ est l'ésperance conditionnelle estimée, les $\hat\epsilon_i$ sont les résidus empiriques de la régression, et $\hat\sigma$ dénote l'écart-type empirique conditionnel.\\
 
-Il est possible d'utiliser un réseau de neurone à la place de la régression. Nous proposerons d'utiliser ces deux méthodes dans la partie$2$ sur des exemples, grâce au package \textbf{abc} du logiciel $R$. Voici un algorithme qui se base sur cette méthode, issu de l'article de Beaumont.
+ Voici un algorithme qui se base sur cette méthode, issu de l'article de Beaumont ~\cite{Beaumont}.
 \\
 
 \fbox{\begin{minipage}{0.9\textwidth}
@@ -178,7 +192,7 @@ Les méthodes SMC (Sequential Monte Carlo) permettent d'estimer des variables ca
 \[\left\{ \begin{array}{l} x_{n+1}=f(x_n)+\epsilon_n \\ y_n=g(x_n)+\eta_n\end{array} \right.\]
 où les suites $\epsilon$ et $\eta$ sont par exemple des bruits blancs indépendants. On suppose que l'on connaît $f$,$g$, ainsi que la distribution de $\epsilon$ et $\eta$. \\
 
-Voici un algorithme SMC adapté au cadre ABC proposé dans l'article de Beaumont :\\
+Voici un algorithme SMC adapté au cadre ABC proposé dans l'article de Beaumont~\cite{Beaumont} :\\
 
 \fbox{\begin{minipage}{0.9\textwidth}
 On se donne une suite décroissante de seuils : $\epsilon_1..\epsilon_T$\\
@@ -205,7 +219,7 @@ Pour $n$ allant de $1$ au nombre de simulations souhaité $N$, faire :
 
 \subsection{Modèle SIR avec contact tracing}
 
-Nous étudierons dans cette partie l'application des méthodes ABC à l'épidémie du VIH à Cuba suivant l'article de Blum et Tran ~\cite{BlumTran}. Le modèle est formé de trois variables : les individus sains $S$, les individus infectés $I$, et les individus repérés $R$. On suppose qu'une fois un individu repéré, il ne contamine plus personne, et est soit dans la classe $R_1$ s'il a été repéré par un test aléatoire (prise de sang, grossesse,...), soit dans la classe $R_2$ s'il l'a été par contact tracing. On peut quitter où arriver dans une certaines classe au taux indiqués dans la figure \ref{SIR}.\\
+Nous étudierons dans cette partie l'application des méthodes ABC à l'épidémie du VIH à Cuba suivant l'article de Blum et Tran ~\cite{BlumTran}. Le modèle est formé de trois variables : les individus sains $S$, les individus infectés $I$, et les individus repérés $R$. On suppose qu'une fois un individu repéré, il ne contamine plus personne. Il est alors soit dans la classe $R_1$ s'il a été repéré par un test aléatoire (prise de sang, grossesse,...), soit dans la classe $R_2$ s'il l'a été par contact tracing. Rappelons que le contact tracing est une méthode de pistage des individus HIV positifs : à chaque dépistage, on demande à un individu infecté qui ont été ses partenaires sexuels afin de les prévenir du risque encouru. On peut quitter où arriver dans une certaines classe au taux indiqués dans la figure \ref{SIR}.\\
 \begin{figure}[!h]\centering
 \begin{tikzcd}
 	{}	&		{}	&					{}		&  R_1\\
@@ -216,14 +230,14 @@ Nous étudierons dans cette partie l'application des méthodes ABC à l'épidém
 \label{SIR}
 \end{figure}
 
-On notera $\theta=(\mu_1,\lambda_1,\lambda_2,\lambda_3,c)$, qui paramètre le modèle. Il a été démontré par Clemençon \textit{et al.}~\cite{Clemencon} que le système d'EDS obtenu à partir de ce modèle converge à la limite macroscopique (population de grade taille) vers les équations classiques de l'épidémiologie :
+On notera $\theta=(\mu_1,\lambda_1,\lambda_2,\lambda_3,c)$, qui paramètre le modèle. Il a été démontré par Clemençon \textit{et al.}~\cite{Clemencon} que le système d'EDS obtenu à partir de ce modèle converge à la limite macroscopique (population de grande taille) vers les équations classiques de l'épidémiologie :
 \[\left\{\begin{array}{rl} s'_t& = \mu_0-\lambda_0 s_t -\lambda_1 s_t i_t \\
                        i'_t  & =\lambda_1 s_t i_t -(\mu_1+\lambda_2)i_t -\lambda_3i_t\int \varphi (a) \rho_t(a) da \\
 		\rho_t(0) &= \lambda_2 i_t +\lambda_3 i_t \int \varphi (a) \rho_t(a) da  \\
 \end{array}\right.\]
 (ici $\varphi(t)=e^{-ct}$)\\
 
-Voici un algortihme de simulation du modèle tiré de ~\cite{BlumTran}:\\
+Voici un algortihme de simulation du modèle tiré de l'article de Blum et Tran~\cite{BlumTran}:\\
 
 \fbox{\begin{minipage}{0.9\textwidth}
 \begin{enumerate}
@@ -244,6 +258,26 @@ Sachant que l'on a simulé $k$ événements aus temps $t_j$ pour $j=1,k$, et que
 \end{minipage}}\\
 \\
 
+La figure \ref{SIRCT} illustre cet algorithme avec un code R disponible entièrement à la page web : \url{https://github.com/cdellaie/ABCEpidemiolgy} (fichier ABCandSIR.R). On a simulé $10 000$ événements avec une population de $201$ individus, avec les paramètres $(\mu_1,\lambda_1,\lambda_2,\lambda_3)=(0.5,0.5,0.2,0.3)$.
+
+\begin{figure}[!h]\centering
+\includegraphics[scale=0.4]{SIR.jpeg}
+\caption{Simulations}
+\label{SIRCT}
+\end{figure}
+
+\subsection{Méthodes ABC}
+
+Nous présentons dans cette section coment appliquer les méthodes ABC au modèle précédent, \textit{SIR} avec \textit{contact tracing}. Les paramètres du modèle prennent pour \textit{prior} :
+\[(\log \mu_1, \log \lambda_1, \log \lambda_2,\log \lambda_3) \quad \sim \quad U_{(-6,-4)}\otimes U_{(-9,-6)} \otimes U_{(-4,3)} \otimes U_{(-8,2)} \]
+où $U_{(a,b)}$ désigne une loi uniforme sur l'intervalle $(a,b)$.\\
+
+On suppose que l'on dispose de données observées, à savoir le nombre d'individus détéctés chaque année $R^1_{obs}(t)$ et $R^2_{obs}(t)$. On simule alors $N$ trajectoires $R^j_l$ selon le \textit{prior} ci-dessus, et on observe la norme $\mathcal L^1$ entre les données simulées et observées :
+\[|R^j_{obs}-R^j_{l}|_1=\int_0^T |R^j_{obs}(t)-R^j_{l}(t)| dt \quad , l=1..N, j\in\{1,2\}.\]
+
+On choisit un noyau produit pour les poids : $W_l=K_{\delta_1}(|R^1_{obs}-R^1_{l}|_1)K_{\delta_2}(|R^2_{obs}-R^2_{l}|_1)\quad, l = 1,N$.\\
+
+Nous aurions aimé pouvoir simuler sur des données réelles, mais par manque de temps, ce rapport s'arrête ici.
 \newpage
 
 \bibliographystyle{plain}

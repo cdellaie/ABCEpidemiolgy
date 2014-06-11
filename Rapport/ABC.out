@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.1}{Principe et historique}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{M\351thodes ABC.}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Un exemple simple}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Trois algorithmes importants en m\351thode ABC}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Correction par r\351gression locale}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Algorithme MCMC dans le cadre ABC}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{M\351thodes de Monte-Carlo S\351quentielles}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Application en \351pid\351miologie}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Mod\350le SIR avec contact tracing}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{M\351thodes ABC}{section.3}% 10
